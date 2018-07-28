@@ -30,9 +30,14 @@ def with the variables inlined as constants using:
 
 ```shell
 $ bash freeze_inference_graph.sh
+```
 
 ### Optimize the Resnet-50 with TensorRT
 
 [TensorRT](https://developer.nvidia.com/tensorrt) is NVIDIA's inference
 optimizer for deep learning. Briefly, TensorRT rewrites parts of the
 execution graph to allow for faster prediction times.
+
+```shell
+$ bash tensorrt_optimize_graph.sh
+```
