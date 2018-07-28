@@ -36,7 +36,7 @@ $ python classificaiton/resnet50
 
 ## Freezing the exported Graph
 If you then want to use the resulting model with your own or pretrained
-checkpoints as part of a mobile model, you can run freeze_graph to get a graph
+checkpoints as part of a mobile model, you can run freeze_inference_graph to get a graph
 def with the variables inlined as constants using:
 
 ```shell
@@ -53,7 +53,7 @@ You have TensorFlow, TensorRT, a graph def, and a picture.
 Now it's time to time.
 
 For the full set of possible parameters, you can run
-`python tensorrt.py --help`. Assuming you used the files provided above,
+`python tensorrt_optimize_graph.py --help`. Assuming you used the files provided above,
 you would run:
 
 ```shell
