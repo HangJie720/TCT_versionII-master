@@ -43,12 +43,27 @@ def with the variables inlined as constants using:
 $ bash freeze_inference_graph.sh
 ```
 
-### Optimize the Resnet-50 with TensorRT
+### Optimize the Resnet-50 with TensorRT and Run the reference
 
 [TensorRT](https://developer.nvidia.com/tensorrt) is NVIDIA's inference
 optimizer for deep learning. Briefly, TensorRT rewrites parts of the
 execution graph to allow for faster prediction times.
 
+You have TensorFlow, TensorRT, a graph def, and a picture.
+Now it's time to time.
+
+For the full set of possible parameters, you can run
+`python tensorrt.py --help`. Assuming you used the files provided above,
+you would run:
+
 ```shell
 $ bash tensorrt_optimize_graph.sh
 ```
+
+### Inference Error
+Native model(i.e.,Frozen model) can successfully implement the inference procedure,however, the converted model with tensorrt are crashed during inference phrase. Detail error information as shown folows:
+```
+Traceback (most recent call last): File "/root/anaconda3/lib/python3.4/site-packages/tensorflow/python/framework/importer.py", line 489, in import_graph_def graph._c_graph, serialized, options) # pylint: disable=protected-access tensorflow.python.framework.errors_impl.InvalidArgumentError: Shape must be rank 2 but is rank 4 for 'import/dense_p7/MatMul' (op: 'MatMul') with input shapes: [1,256,1,1], [256,1]
+```
+
+Original trained model can successfully complete the inference, but the converted model with tensorrt 3.0 are failed at inference phrase. Why the shape are [1,256,1,1], original should be [1,256]? If the tensorrt are not supported the tf.matmul() function? if not, how can we do to solve the problem?
